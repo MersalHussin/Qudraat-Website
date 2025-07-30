@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../components/css/navbar.css";
+import supportPage from "../pages/SupportPage";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -21,7 +23,7 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const sections = [
-        { id: "#", offset: 0 },
+        { id: "#landing", offset: 0 },
         { id: "#about-sec", offset: document.getElementById("about-sec")?.offsetTop },
         { id: "#journy", offset: document.getElementById("journy")?.offsetTop },
         { id: "#CTA", offset: document.getElementById("CTA")?.offsetTop },
@@ -30,7 +32,7 @@ const Navbar = () => {
 
       const scrollPosition = window.scrollY + 150;
 
-      let current = "#";
+      let current = "#landing";
       for (let i = 0; i < sections.length; i++) {
         if (
           sections[i].offset !== undefined &&
@@ -65,9 +67,9 @@ const Navbar = () => {
         <ul className={`nav-list ${menuOpen ? "active" : ""}`}>
           <li>
             <a
-              href="#"
-              className={activeLink === "#" ? "active" : ""}
-              onClick={() => handleLinkClick("#")}
+              href="#landing"
+              className={activeLink === "#landing" ? "active" : ""}
+              onClick={() => handleLinkClick("#landing")}
             >
               الرئيسية
             </a>
@@ -108,14 +110,23 @@ const Navbar = () => {
               موقعنا
             </a>
           </li>
+          <li>
+            <Link
+              to="/support"
+              className="contact-link"
+             
+            >
+              تواصل معنا
+            </Link>
+          </li>
         </ul>
-        <a
+        <Link
           className="contact-us"
-          href="tel:+201040031584"
-          onClick={() => handleLinkClick("#contact")}
+          to="/support"
+          // onClick={() => handleLinkClick("#contact")}
         >
-          تواصل معنا <i className="fa-solid fa-phone-volume"></i>
-        </a>
+          تواصل معنا  
+        </Link>
       </header>
     </>
   );
